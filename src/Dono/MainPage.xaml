@@ -1,0 +1,103 @@
+﻿<Page x:Name="page"
+    x:Class="Dono.MainPage"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="using:Dono"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    mc:Ignorable="d"
+    KeyDown="Shell_KeyDown">
+
+    <SplitView x:Name="NavigationPane" DisplayMode="CompactOverlay">
+        <SplitView.Pane>
+            <Grid Background="#FF2196F3">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="44" />
+                    <RowDefinition Height="*"/>
+                </Grid.RowDefinitions>
+
+                <Button x:Name="HamburgerButton" Grid.Row="0" Style="{StaticResource MenuItemButtonStyle}" Tag="&#xE700;" Click="HamburgerButton_Click" Foreground="White" Width="48"/>
+
+                <StackPanel x:Name="NavigationMenu" Orientation="Vertical" Grid.Row="1" Background="#FF2196F3" Canvas.ZIndex="1">
+                    <RadioButton x:Name="Labels"
+                       GroupName="Group1"
+                       Style="{StaticResource NavigationButtonStyle}"
+                       Tag="&#xE8EC;"
+                       Checked="LabelsButton_Checked"
+                       Content="Labels" Foreground="White" HorizontalAlignment="Stretch"/>
+                    <RadioButton x:Name="Addlabel"
+                       GroupName="Group1"
+                       Style="{StaticResource NavigationButtonStyle}"
+                       Tag="&#xE710;"
+                       Checked="AddLabelButton_Checked"
+                       Content="Add Label" Foreground="White" HorizontalAlignment="Stretch"/>
+                    <RadioButton x:Name="Key"
+                       GroupName="Group1"
+                       Style="{StaticResource NavigationButtonStyle}"
+                       Tag="&#xE8D7;"
+                       Checked="KeyButton_Checked"
+                       Content="Key" Foreground="White" HorizontalAlignment="Stretch"/>
+                </StackPanel>
+            </Grid>
+
+        </SplitView.Pane>
+        <SplitView.Content>
+            <Grid x:Name="Main" RequestedTheme="Light">
+                
+                <StackPanel x:Name="MyLabelsGrid" RequestedTheme="Light" Visibility="Visible" Background="White" VerticalAlignment="Top">
+                    <Grid Background="#2196f3" Height="44" VerticalAlignment="Top" >
+                        <TextBlock x:Name="labelsTextBlock" Text="Your Labels" IsDoubleTapEnabled="False" IsHoldingEnabled="False" IsRightTapEnabled="False" IsTapEnabled="False" Foreground="White" Style="{StaticResource TitleTextBlockStyle}" SelectionHighlightColor="Transparent" TextAlignment="Center" FontSize="29.333"/>
+                    </Grid>
+                    <Grid x:Name="MyLabelsGridContent">
+                        <Grid.Resources>
+                            <Storyboard x:Name="MyLabelsGridFadein">
+                                <DoubleAnimation From="0" To="1" Storyboard.TargetName="MyLabelsGridContent" Storyboard.TargetProperty="Opacity" Duration="0:0:0.6" />
+                            </Storyboard>
+                        </Grid.Resources>
+                        <ListView x:Name="MyLabelsListView" Visibility="Collapsed" RequestedTheme="Light" Background="White" Loaded="MyLabelsGrid_Loaded" SelectionMode="None" Margin="5" IsMultiSelectCheckBoxEnabled="False" HorizontalAlignment="Center"/>
+                        <TextBlock x:Name="LonelyTextBlock" Margin="20,100,20,0" TextWrapping="Wrap" VerticalAlignment="Top" IsDoubleTapEnabled="False" IsHoldingEnabled="False" IsRightTapEnabled="False" IsTapEnabled="False" Foreground="#FF2196F3" Style="{StaticResource SubheaderTextBlockStyle}" TextAlignment="Center">
+                        It's lonely here!
+                        <LineBreak/>
+                        <LineBreak/>
+                            Add your Labels in order to retrieve your passwords for them
+                            <TextBlock.Resources>
+                                <Storyboard x:Name="LonelyFadein">
+                                    <DoubleAnimation From="0" To="1" Storyboard.TargetName="MyLabelsGrid" Storyboard.TargetProperty="Opacity" Duration="0:0:0.6" />
+                                </Storyboard>
+                            </TextBlock.Resources>
+                        </TextBlock>
+                    </Grid>
+                </StackPanel>
+
+                <Grid x:Name="AddLabelGrid" RequestedTheme="Light" Visibility="Collapsed" Background="White" VerticalAlignment="Top">
+                    <Grid Background="#2196f3" Height="44" VerticalAlignment="Top" >
+                        <TextBlock x:Name="addlabelTextBlock" TextWrapping="Wrap" Height="44" Text="Add Label" VerticalAlignment="Top" IsDoubleTapEnabled="False" IsHoldingEnabled="False" IsRightTapEnabled="False" IsTapEnabled="False" Foreground="White" Style="{StaticResource TitleTextBlockStyle}" SelectionHighlightColor="Transparent" TextAlignment="Center" FontSize="29.333"/>
+                    </Grid>
+                    <Grid x:Name="AddLabelGridContent">
+                        <Grid.Resources>
+                            <Storyboard x:Name="AddLabelGridFadein">
+                                <DoubleAnimation From="0" To="1" Storyboard.TargetName="AddLabelGridContent" Storyboard.TargetProperty="Opacity" Duration="0:0:0.6" />
+                            </Storyboard>
+                        </Grid.Resources>
+                        <TextBox x:Name="newLabelTextBox" Margin="0,250,0,0" HorizontalAlignment="Center" VerticalAlignment="Top" TextAlignment="Center" KeyDown="newLabelTextBox_KeyDown" LostFocus="newLabelTextBox_LostFocus" Height="20" Width="284"/>
+                    </Grid>
+                </Grid>
+                
+                <Grid x:Name="KeyGrid" RequestedTheme="Light" Visibility="Collapsed" Background="White" Loaded="KeyGrid_Loaded" VerticalAlignment="Top">
+                    <Grid Background="#2196f3" Height="44" VerticalAlignment="Top" >
+                        <TextBlock x:Name="yourKeyTextBlock" TextWrapping="Wrap" Height="44" Text="Your Key" VerticalAlignment="Top" IsDoubleTapEnabled="False" IsHoldingEnabled="False" IsRightTapEnabled="False" IsTapEnabled="False" Foreground="White" Style="{StaticResource TitleTextBlockStyle}" SelectionHighlightColor="Transparent" TextAlignment="Center" FontSize="29.333" KeyDown="yourKeyTextBlock_KeyDown"/>
+                    </Grid>
+                    <Grid x:Name="KeyGridContent">
+                        <Grid.Resources>
+                            <Storyboard x:Name="KeyGridFadein">
+                                <DoubleAnimation From="0" To="1" Storyboard.TargetName="KeyGridContent" Storyboard.TargetProperty="Opacity" Duration="0:0:0.6" />
+                            </Storyboard>
+                        </Grid.Resources>
+                        <PasswordBox x:Name="passwordBox" Margin="0,250,0,0" HorizontalAlignment="Center" LostFocus="passwordBox_LostFocus" RequestedTheme="Light" Height="20" VerticalAlignment="Top" Width="284" IsPasswordRevealButtonEnabled="True" KeyDown="yourKeyTextBlock_KeyDown"/>
+                    </Grid>
+                </Grid>
+            </Grid>
+            
+        </SplitView.Content>
+    </SplitView>
+</Page>
