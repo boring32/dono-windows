@@ -3,3 +3,7 @@
 ## License
 
 GNU GPLv3
+
+## OSS used
+
+* [Portable BouncyCastle](https://www.nuget.org/packages/Portable.BouncyCastle/)

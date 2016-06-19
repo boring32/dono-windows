@@ -252,7 +252,7 @@
                 return;
             }
 
-            var password = Dono.ComputePassword(key, label);
+            var password = new Dono().ComputePassword(key, label);
 
             this.CopyToClipboard(password);
 
